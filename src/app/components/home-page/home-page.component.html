@@ -1,0 +1,42 @@
+<div class="container-fluid drop">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <select class="form-select" id="sel1" name="sellist1" formControlName="teamName">
+          <ng-container *ngFor="let team of teams">
+              <option value={{team.id}} >{{team.full_name}}</option>
+          </ng-container>
+          
+      </select>
+      <button type="submit" class="btn btn-primary" >Track Team</button>
+  </form>
+  
+      <div *ngFor="let team of teamsList">
+          <p>{{team.full_name}}[{{team.abbreviation}}]</p>
+          <div class="card">
+          <div class="card-header">
+              
+              <button type="button" class="close" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="card-body">
+              <div class="row">
+                  <div class="col-8">
+                      <div>Results of past 12 days</div>
+                      <div>Avg pts scored:</div>
+                      <div>Avg pts conceded:</div>
+                      
+
+                  </div>
+                  <div class="col-4">
+                      
+                  </div>
+              </div>
+          </div>
+          <div class="card-footer">
+          <button class="btn btn-primary">See game Results >></button>
+      </div>
+      </div>             
+      </div>
+      
+      
+  </div>
