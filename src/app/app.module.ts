@@ -7,9 +7,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { DetailPageComponent } from './components/detail-page/detail-page.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,HomePageComponent,DetailPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
