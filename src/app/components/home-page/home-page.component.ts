@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {FormControl, FormGroup, Validator} from '@angular/forms'
 
 @Component({
   selector: 'app-home-page',
@@ -8,20 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private rapidAPi : RapidAPIService){}
+  // constructor(private rapidAPi : RapidAPIService){}
 
-  teams : Team[] = [];
+  // teams : Team[] = [];
   
-  teamsList : Team[] = [];
+  // teamsList : Team[] = [];
   
-  // teamId!: number;
+  // // teamId!: number;
 
-  form = new FormGroup({
-    //TODO
-    teamName : new FormControl("1")
-  })
+  // form = new FormGroup({
+  //   //TODO
+  //   teamName : new FormControl("1")
+  // })
 
   ngOnInit() {
-  }
+   }
 
 }
