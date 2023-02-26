@@ -11,7 +11,9 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { DetailPageComponent } from './components/detail-page/detail-page.component';
 
 @NgModule({
-  declarations: [AppComponent,HomePageComponent,DetailPageComponent],
+  declarations: [AppComponent,
+    HomePageComponent,
+    DetailPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
