@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Team } from '../../model/team';
 import { TeamData } from '../../model/team-data';
 import { RapidApiService } from '../../services/rapid-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -11,10 +12,9 @@ import { RapidApiService } from '../../services/rapid-api.service';
   styleUrls: ['./home-page.component.css'],
 })
 export class HomePageComponent implements OnInit {
-
   // public teamsSelected: TeamData[] = [];
-  
-  constructor(private rapidAPi: RapidApiService) {}
+
+  constructor(private rapidAPi: RapidApiService, private router: Router) {}
 
   teams: Team[] = [];
 
@@ -23,6 +23,22 @@ export class HomePageComponent implements OnInit {
   form = new FormGroup({
     teamName: new FormControl('1'),
   });
+
+  remove(id: number) {
+    this.teamsDataList = this.teamsDataList.filter((teamData) => {
+      return teamData.team.id !== id;
+    });
+    localStorage.setItem('teamDataList', JSON.stringify(this.teamsDataList));
+  }
+
+  sendToResultPage(id: number) {
+    let teamData: TeamData = this.teamsDataList.find(
+      (teamData) => teamData.team.id === id
+    );
+    this.router.navigateByUrl(`results/${teamData.team.abbreviation}`, {
+      state: { teamData: teamData },
+    });
+  }
 
   onSubmit() {
     let id = this.form.get('teamName').value;
@@ -62,29 +78,28 @@ export class HomePageComponent implements OnInit {
 
       console.log(this.teamsDataList);
 
+      localStorage.setItem('teamDataList', JSON.stringify(this.teamsDataList));
     });
-
-
   }
-
-  remove() {}
 
   ngOnInit(): void {
-
     this.loadTeams();
-    
-
-   
+    this.loadTeamData();
   }
-    
-  
+
+  loadTeamData() {
+    let storedTeamDataList = localStorage.getItem('teamDataList');
+    if (storedTeamDataList === null) {
+      localStorage.setItem('teamDataList', JSON.stringify([]));
+    } else {
+      this.teamsDataList = JSON.parse(storedTeamDataList);
+    }
+  }
 
   loadTeams() {
     this.rapidAPi.getTeamData().subscribe((res: any) => {
       this.teams = res.data;
-      // this.headerInfo = res.data;
+     
     });
-
-    
   }
 }

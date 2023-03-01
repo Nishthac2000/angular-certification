@@ -1,0 +1,25 @@
+img {
+  width: 200px;
+  float: right;
+}
+.card {
+  margin-top: 8px;
+}
+.close {
+  position: absolute;
+  top: 2px;
+  right: 7px;
+}
+button {
+  margin-top: 10px;
+}
+.chip {
+  font-size: 20px;
+  display: flex;
+  width: 40px;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border-radius: 20px;
+  text-align: center;
+}

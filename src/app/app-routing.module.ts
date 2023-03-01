@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { DetailPageComponent } from './components/detail-page/detail-page.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 
+//routing Paths
+
 const routes: Routes = [
   {
     path: '',

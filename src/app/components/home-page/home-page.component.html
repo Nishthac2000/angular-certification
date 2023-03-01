@@ -1,4 +1,6 @@
-<div>
+<div class="container-fluid drop">
+  
+  <!-- dropdown -->
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <select
       class="form-select"
@@ -10,24 +12,32 @@
         <option value="{{ team.id }}">{{ team.full_name }}</option>
       </ng-container>
     </select>
+    <!-- Track Button -->
     <button type="submit" class="btn btn-primary" id="trackBtn">
       Track Team
     </button>
   </form>
 
-  <!-- <ng-container *ngIf="teamsSelected?.length > 0">
-    <div class="row"> -->
-     <div *ngFor="let teamData of teamsDataList">
+  
+  <div *ngFor="let teamData of teamsDataList">
     <div class="card">
       <div class="card-header">
-        <p>{{ teamData.team.full_name }}[{{ teamData.team.abbreviation }}]
-        <button type="button" class="close" aria-label="Close"> 
-          <!-- <(click)="delete(team)"> -->
-          <span aria-hidden="true">&times;</span>
-        </button></p>
+        <p>
+          {{ teamData.team.full_name }}[{{ teamData.team.abbreviation }}]
 
-        <p> {{teamData.team.conference}}ern conference</p>
-        
+          <!-- Close Button -->
+          <button
+            id="remove{team}"
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="remove(teamData.team.id)"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </p>
+
+        <p>{{ teamData.team.conference }}ern conference</p>
       </div>
       <div class="card-body">
         <div class="row">
@@ -35,60 +45,83 @@
             <div>
               <div>
                 Results of past 12 days
+
+                <!-- For images -->
+
+                <img
+                  src="{{
+                    'https://interstate21.com/nba-logos/' +
+                      teamData.team.abbreviation +
+                      '.png'
+                  }}"
+                  alt="logo"
+                />
                 <ng-container *ngFor="let result of teamData.results">
-                  <span class="dot"
-                     [ngStyle]="{ 'background': result.home_team_score > result.visitor_team_score ? 'green' : 'red' }">
-                                        {{result.home_team_score > result.visitor_team_score ? 'W' : 'L' }}
+                 
                   <div
                     *ngIf="
                       result.home_team.id === teamData.team.id;
                       else elseBlock
                     "
                   >
-                    <p
+                    <div
                       *ngIf="
                         result.home_team_score > result.visitor_team_score;
                         else elseAwayBlock
                       "
                     >
-                      WIN
-                    </p>
+                      <div class="chip" style="background-color: green;">
+                        <p>W</p>
+                      </div>
+                    </div>
                     <ng-template #elseAwayBlock>
-                      <p>LOSS</p>
+                      <div class="chip" style="background-color: red;">
+                        <p>L</p>
+                      </div>
                     </ng-template>
                   </div>
                   <ng-template #elseBlock>
                     <div>
-                      <p
+                      <div
                         *ngIf="
                           result.home_team_score < result.visitor_team_score;
                           else elseAwayBlock
                         "
                       >
-                        WIN
-                      </p>
+                        <div class="chip" style="background-color: green;">
+                          <p>W</p>
+                        </div>
+                      </div>
                       <ng-template #elseAwayBlock>
-                        <p>LOSS</p>
+                        <div class="chip" style="background-color: red;">
+                          <p>L</p>
+                        </div>
                       </ng-template>
                     </div>
                   </ng-template>
-                  </span>
+                  
                 </ng-container>
               </div>
               <div>Avg pts scored:{{ teamData.avgPointScored }}</div>
               <div>Avg pts conceded:{{ teamData.avgPointConceded }}</div>
             </div>
-            <div class="col-4"></div>
-            <!-- <img src='{{ "assets/images/" + teamData.abbreviation + ".png" }}'
-                                    alt="logo" /> -->
+            <div class="col-md-4"></div>
           </div>
         </div>
         <div class="card-footer">
-          <button class="btn btn-primary">See game Results >></button>
+
+          <!-- See Game Results Button -->
+          
+          <button
+            (click)="sendToResultPage(teamData.team.id)"
+            id="results{team}
+          "
+          >
+            See game Results>>
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- </ng-container> -->
 
