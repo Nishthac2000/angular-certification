@@ -38,7 +38,7 @@ export class RapidApiService {
       dateStr += 'dates[]=';
       dateStr += date.getFullYear();
       dateStr += '-';
-      dateStr += date.getMonth();
+      dateStr += date.getMonth()+1;
       dateStr += '-';
       dateStr += date.getDate();
       dateStr += '&';

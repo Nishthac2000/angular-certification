@@ -1,5 +1,4 @@
 <div class="container-fluid drop">
-  
   <!-- dropdown -->
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <select
@@ -18,7 +17,6 @@
     </button>
   </form>
 
-  
   <div *ngFor="let teamData of teamsDataList">
     <div class="card">
       <div class="card-header">
@@ -57,13 +55,13 @@
                   alt="logo"
                 />
                 <ng-container *ngFor="let result of teamData.results">
-                 
                   <div
                     *ngIf="
                       result.home_team.id === teamData.team.id;
                       else elseBlock
                     "
                   >
+                    
                     <div
                       *ngIf="
                         result.home_team_score > result.visitor_team_score;
@@ -99,7 +97,6 @@
                       </ng-template>
                     </div>
                   </ng-template>
-                  
                 </ng-container>
               </div>
               <div>Avg pts scored:{{ teamData.avgPointScored }}</div>
@@ -109,9 +106,8 @@
           </div>
         </div>
         <div class="card-footer">
-
           <!-- See Game Results Button -->
-          
+
           <button
             (click)="sendToResultPage(teamData.team.id)"
             id="results{team}
@@ -124,4 +120,3 @@
     </div>
   </div>
 </div>
-
